@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Select custom form</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item *ngIf="fetchedFormlyForms.length === 0">
+        No forms saved in database
+    </ion-item>
+    <ion-item
+      *ngFor="let fetchedFormlyForm of fetchedFormlyForms"
+    >
+      <ion-label>
+        <i class="fa fa-file-text"></i>
+        Formly form {{ fetchedFormlyForm.filename}}
+      </ion-label>
+      <ion-button color="light" (click)="setSelectedFormlyForm(fetchedFormlyForm)">
+        <ion-icon name="eye"></ion-icon>
+      </ion-button>
+
+      <ion-button color="danger" (click)="openDeleteModal(fetchedFormlyForm)">
+        <ion-icon name="trash-sharp"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-nav-link [component]="rootPage">
+      <ion-item button expand="full" color="dark" [routerLink]="['/app']">
+        <ion-label>
+          Return to main menu
+        </ion-label>
+      </ion-item>
+    </ion-nav-link>
+</ion-content>

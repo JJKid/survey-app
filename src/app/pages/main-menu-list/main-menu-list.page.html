@@ -1,0 +1,23 @@
+
+
+  <ion-list id="main-menu-list">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title> Survey app</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+      <ion-nav-link [component]="formlyFormStorePage" [componentProps]="{currentPage: 'formViewer'}">
+        <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+          <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+          <ion-label>{{ p.title }}</ion-label>
+        </ion-item>
+      </ion-nav-link>
+    </ion-menu-toggle>
+    <ion-item>
+      <small>
+        Currently logged in as: {{currentUser!.email}}
+      </small>
+    </ion-item>
+  </ion-list>
+

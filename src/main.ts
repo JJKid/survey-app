@@ -19,7 +19,7 @@ bootstrapApplication(AppComponent, {
         HttpClientModule,
         FormlyModule.forRoot({
             validationMessages: [{ name: 'required', message: 'This field is required' }],
-            types: [              
+            types: [
             ],
           }),
     ]),

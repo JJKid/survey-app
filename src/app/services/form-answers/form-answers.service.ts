@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Form } from '../interfaces/form';
+import { Form } from 'src/app/interfaces/form';
 declare var require: any;
 var PouchDB = require('pouchdb').default;
 
@@ -44,7 +44,7 @@ export class FormAnswersService {
     this.pouchdb.sync(this.remote, options);
   }
 
-  getFormAnswers(){    
+  getFormAnswers(){
     if (this.data) {
       return Promise.resolve(this.data);
     }
@@ -66,20 +66,21 @@ export class FormAnswersService {
     });
   }
 
-  addFormAnswers(form: Form, formAnswers: any) {
-    var promise = this.pouchdb.put({
+  addFormAnswers(form: Form, formAnswers: any, userEmail: string) {
+    let pouchDbFormAnswers: any = {
       _id: "formAnswers:" + new Date().getTime(),
-      formId: "66217b17b50e5867f32720e0", 
-      formFilename: "New form 1",
-      formAnswers: formAnswers
-      })
+      formId: form._id,
+      formFilename: form.filename,
+      formAnswers: formAnswers,
+      userEmail: userEmail
+    }
+    var promise = this.pouchdb.put(pouchDbFormAnswers)
       .then((result: PouchDBPutResult): string => {
         return("Saved form answers: " +  result.id + " Revision: " + result.rev);
-        }
-      );
-    
+      });
+
     return promise;
-  }  
+  }
 
 
   handleChange(change:any) {
@@ -111,7 +112,7 @@ export class FormAnswersService {
   updateFormAnswers(_id: any, formAnswers: any) {
     this.pouchdb.get(_id).then( (doc: any) => {
       //doc._deleted = false;
-      //formId: "66217b17b50e5867f32720e0", 
+      //formId: "66217b17b50e5867f32720e0",
       //doc.formFilename = "New form 1",
       doc.formAnswers = formAnswers
       return this.pouchdb.put(doc);

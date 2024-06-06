@@ -3,17 +3,20 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/fill-survey',
+    redirectTo: 'app',
     pathMatch: 'full',
   },
   {
-    path: 'folder/:id',
-    loadComponent: () =>
-      import('./folder/folder.page').then((m) => m.FolderPage),
+    path: 'app/:id',
+    loadComponent: () => import('./pages/formly-viewer/formly-viewer.page').then( m => m.FormlyViewerPage)
   },
   {
     path: 'formly-form-store',
-    loadComponent: () => import('./formly-form-store/formly-form-store.page').then( m => m.FormlyFormStorePage)
+    loadComponent: () => import('./pages/mainMenuListPages/formly-form-store/formly-form-store.page').then( m => m.FormlyFormStorePage)
   },
+  {
+    path: 'main-menu-list',
+    loadComponent: () => import('./pages/main-menu-list/main-menu-list.page').then( m => m.MainMenuListPage)
+  }
 ];
 

@@ -4,7 +4,7 @@ import { User } from "./user";
 export interface FormlyForm {
     _id?: any;
     filename: string;
-    fields?: FormlyFieldConfig[];
+    fields?: FormlyFieldConfig[] | any;
     author?: User | string;
     readers?: string[];
 }
